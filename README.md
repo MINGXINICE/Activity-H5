@@ -1,1 +1,1 @@
-Spring ： 春节活动
+Spring ： Spring Festival
