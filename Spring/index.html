@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>勾心斗饺领红包</title>
+    <script>
+      (function(doc ,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+              docEl.style.fontSize = '100px';
+            }else{
+              docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+            }
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }(document, window));
+    </script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body id="index">
+    <span class="myPrize"></span>
+    <span class="rule"></span>
+    <img class="xuanze" src="img/xuanze.png" alt="选择一碗福饺开始制作">
+    <div class="bar">
+        <span class="p1 act"></span>
+        <span class="p2"></span>
+        <span class="p3"></span>
+        <span class="p4"></span>
+    </div>
+
+    <div class="show">
+        <div class="banner">
+            <img src="img/jiaozi/zhaocaijiao.png" alt="">
+        </div>
+        <img class="title" src="img/jiaozi/zhaocaititle.png" alt="">
+        <div class="text">
+            <p>挣钱不累 工资翻倍</p>
+            <p>2018年，数钱数到手发软</p>
+        </div>
+    </div>
+    <div id="make"></div>
+
+    <div class="ruleWrap wrap">
+        <div class="con">
+            <p class="title"><span>●</span>活动规则<span>●</span></p>
+            <p class="text">中奖说明：<br>活动期间用户可制作福饺并分享之后获得奖励，单个用户每天有3次抽奖机会。</p>
+            <p class="border"></p>
+            <p class="text">1.活动时间：2月15日—2月21日</p>
+            <p class="text">2.奖品设置：iPhoneX、iPad2、快牙水壶、快牙抱枕、随机话费、随机牙豆等奖励</p>
+            <p class="text">3.实物奖品在活动结束后7个工作日内发货</p>
+            <p class="text">4.如发现违规作弊嫌疑，将取消参与活动资格</p>
+            <p class="text">5.本活动最终解释权归快牙官方所有</p>
+        </div>
+    </div>
+</body>
+<script src="js/zepto.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/text.js"></script>
+<script>
+    $(function () {
+      var selcted = item[0];
+      select(selcted);
+      $(".bar span").on("tap", function () {
+        var index = $(this).index();
+        $(this).addClass('act').siblings().removeClass('act');
+        selcted = item[index];
+        select(selcted)
+      })
+      function select(selcted){
+        var htmlCodes = [
+          '<div class="banner">',
+          '            <img src='+selcted.img +' alt="">',
+          '        </div>',
+          '        <img class="title" src='+selcted.title +' alt="">',
+          '        <div class="text">',
+          '            <p>'+selcted.p1 +'</p>',
+          '            <p>'+selcted.p2 +'</p>',
+          '        </div>'
+        ].join("");
+        $(".show").html(htmlCodes);
+      }
+      $("#make").on("tap", function () {
+        window.location = "./share.html?type="+ selcted.id;
+      })
+      //奖品记录
+      $('.myPrize').click(function(){
+        window.location.href = './luckhistory.html';
+      });
+      //抽奖页规则和奖品提示
+      $('.rule').click(function(){
+        $('.ruleWrap').fadeIn(300);
+      });
+      $('.wrap').click(function(){
+        $(this).fadeOut(300);
+      });
+    })
+</script>
+</html>

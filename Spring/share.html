@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>勾心斗饺领红包</title>
+    <script>
+      (function(doc ,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+              docEl.style.fontSize = '100px';
+            }else{
+              docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+            }
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }(document, window));
+    </script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body id="sharePage">
+<div class="zhufu">
+    <p>福饺包好啦！快去分享给大家吧~</p>
+    <p>返回即可领取红包哦</p>
+</div>
+<div id="share"></div>
+</body>
+<script src="js/zepto.min.js"></script>
+<script src="js/zapya.js"></script>
+<script src="js/ztool.js"></script>
+<script>
+  $(function () {
+    var query = Ztool.getQueryString("type");
+    var desc = [
+      "想挣钱不累还工资翻倍？那就收下这碗招财饺吧！",//招财
+      "送你一碗桃花饺，明年桃花满满",               //桃花
+      "收下这碗好运饺，好运就会不停哦",             //好运
+      "吃了这碗状元饺，学业事业双丰收"              //状元
+    ]
+
+    $("#share").on("tap", function () {
+      // 快牙分享信息
+      var  _gShareIfo = {
+        title: '我的天呐！这碗饺子里面可能吃出iPhoneX！',
+        desc: desc[query],
+        url: window.location.href + '&z_tag=1234',
+        thumbnail: 'http://downloadg.dewmobile.net/weixin/prod/shengdan/share.jpg'// 分享图标
+      };
+      Zapya.share(_gShareIfo);
+    });
+
+    Ztool.initWX({
+      title : '我的天呐！这碗饺子里面可能吃出iPhoneX！',
+      link  :  window.location.href,
+      imgUrl  : 'http://downloadg.dewmobile.net/weixin/prod/shengdan/share.jpg',
+      desc  : desc[query]
+    });
+
+  })
+
+  function sns_share(){
+    window.location.href = './luck.html';
+  }
+
+</script>
+<script src="https://cdn.bootcss.com/eruda/1.4.0/eruda.min.js"></script>
+<script>eruda.init();</script>
+</html>

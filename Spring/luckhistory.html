@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<meta content="telephone=no" name="format-detection"/>
+	<title>兑换记录</title>
+	<link rel="stylesheet" href="./css/index.css">
+	<script>
+      (function(doc ,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+              docEl.style.fontSize = '100px';
+            }else{
+              docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+            }
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }(document, window));
+	</script>
+	<!--<script>-->
+		<!--var _hmt = _hmt || [];-->
+		<!--(function() {-->
+			<!--var hm = document.createElement("script");-->
+			<!--hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";-->
+			<!--var s = document.getElementsByTagName("script")[0];-->
+			<!--s.parentNode.insertBefore(hm, s);-->
+		<!--})();-->
+	<!--</script>-->
+</head>
+<body id="history">
+
+<div class="top">
+	<img src="./img/ico_msg.png">
+	<span>客服QQ：1873647236</span>
+</div>
+<div class="title">如果有未领取奖品请点击重新提交信息</div>
+<div class="historyBox">
+	<!--<p>-->
+		<!--<span class="name">100牙豆</span>-->
+		<!--<span class="time">中奖时间：<i>2017-08-21</i></span>-->
+		<!--<span class="status">未领取</span>-->
+	<!--</p>-->
+	<!--<p>-->
+		<!--<span class="name">100牙豆</span>-->
+		<!--<span class="time">中奖时间：<i>2017-08-21</i></span>-->
+		<!--<span class="status">未领取</span>-->
+	<!--</p>-->
+</div>
+
+</body>
+<!--手机端响应式布局rem,在文档头引入-->
+<script src="./js/jquery.js"></script>
+<script src="./js/zapya.js"></script>
+<script src="./js/ztool.js"></script>
+<script src="./js/dialog.js"></script>
+<!--<script src="//cdn.jsdelivr.net/eruda/1.2.0/eruda.min.js"></script>-->
+<!--<script>eruda.init();</script>-->
+<script>
+
+// Dialog({
+//   title: "提示",
+//   info: "只能在快牙内参与活动",
+//   btnText: "确定",
+//   footer: true,
+//   type: 0,
+//   btnEvent : function(){
+//     submit();
+//  }
+// });
+
+// var mark = 'zhuibu';
+var url  = 'http://210.73.213.236:9392';
+var mark = 'spring';
+//var url  = 'http://lottery.kuaiya.cn';
+var ut   = Zapya.getToken();
+var sToken = '';
+
+// 页面数据
+var pageData = [];
+function loadInfo(){
+	$.ajax({
+		url: url + '/active/getUserAwards?ut='+ ut +'&mark=' + mark,
+		type: 'GET',
+		dataType : "json"
+	}).done(function(json){
+		pageData = json.awards;
+		// 弹出表单默认的ut与mark值
+		$('input[name="ut"]').val(ut);
+		$('input[name="mark"]').val(mark);
+		for (var i=0 ; i < pageData.length; i++ ) {
+			var statusTxt = "未领取";
+			if (!pageData[i].active) {
+				statusTxt = "已领取";
+			}
+			if (pageData[i].type === 3) {
+				statusTxt = "已领取";
+			}
+			var htmlCodes = [
+				'<p data-index="'+ i +'">',
+				'		<span class="name">'+ pageData[i].name +'</span>',
+				'		<span class="time">中奖时间：<i>'+ pageData[i].date +'</i></span>',
+				'		<span class="status">'+ statusTxt +'</span>',
+				'	</p>'
+				].join("");
+
+			$(".historyBox").append(htmlCodes);
+		}
+	})
+}
+
+loadInfo();
+
+// 验证数据格式
+var formReg = {
+  "mobile" : function(val) {
+    if (val=="") {
+      return "请填写手机号码"
+    } else if ( !/^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}$/.test(val) ) {
+      return "手机号码格式不正确"
+    }
+  },
+
+  "name" : function(val) {
+    if (val=="") {
+      return "请填写您的姓名"
+    }
+  },
+
+  "address" : function (val) {
+    if (val=="") {
+      return "请填写您的地址"
+    }
+  }
+}
+
+	//提交表单
+	function submit(){
+	   var data = {};
+	   //遍历input给然后data赋值
+	   $('#Dialog').find("input").each(function(index, el){
+	     data[el.name] = $.trim(el.value);
+	   });
+	   //验证数据格式
+	   for (var fn in data ) {
+	     var msg = formReg[fn](data[fn]);
+	     if (msg) {
+	       Ztool.opMsgBox({ strText : msg, duration : 3000});
+	       return;
+	     }
+	   }
+	   console.log(data);
+	   //添加用户数据
+	   data.ut    = ut;
+	   data.mark  = mark;
+	   data.token = sToken;
+	   // 提交数据
+	   $.ajax({
+	     type : 'GET',
+	     url : url+'/active/saveAddress',
+	     data : data,
+	     dataType : "JSON",
+	     success : function (result) {
+	       console.log(result);
+	       if( result && result.status == 1 ){
+	         Ztool.opMsgBox({strText:'领取成功',duration:3000});
+					setTimeout(function(){
+						window.location.href = window.location.href + '?ok=ok';
+					},500)
+	       } else {
+	         Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+	       }
+	       $('#Dialog').fadeOut();
+	     },
+	     error : function (msg) {
+	       console.log(msg);
+	       Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+	     }
+	   })
+	 }
+
+	// 点击事件
+	$('.historyBox').on( 'click', 'p' , function(event){
+		var $this = $(this),
+				index = $this.data('index');
+		if (!pageData[index].active || pageData[index].type === 3) {
+			console.log("已领取")
+			return;// 已领取或牙豆不弹出填写中奖信息
+		}
+		// 弹出填写个人中奖资料信息
+		var prize = pageData[index];
+		//根据待领取奖品索引值找到对应的奖品token
+		sToken = pageData[index].ltoken;
+		Dialog({
+		  title: "恭喜您获得",
+		  info: prize.name,
+		  btnText: "确定",
+		  footer: true,
+		  type: prize.type,
+		  btnEvent : function(){
+		    submit();
+		  }
+		});
+	})
+</script>
+</html>

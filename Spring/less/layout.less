@@ -1,0 +1,295 @@
+// 居中
+.center(@trans){
+  position: absolute;
+  left: 50%;
+  transform: translateX(@trans);
+}
+// 按钮
+.btn{
+  .center(-51%);
+  bottom: 9%;
+  width: 4rem;
+  height: .85rem;
+}
+
+// 选饺子，开始包福饺
+#index{
+  background: url("../img/index-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  #make{
+    .btn;
+    background: url("../img/btn-1.png") no-repeat center;
+    background-size: 100% 100%;
+  }
+  .xuanze{
+    .center(-50%);
+    top: 13.5%;
+    width: 3.43rem;
+    height: .74rem;
+  }
+  .bar{
+    position: absolute;
+    top: 22%;
+    width: 100%;
+    padding: 0 .3rem;
+    display: flex;
+    justify-content: space-around;
+    span{
+      flex-shrink:1;
+      display: block;
+      width: 1.3rem;
+      height: 1.20rem;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .p1{
+      background-image: url(../img/jiaozi/1.png);
+      background-size: 90% 90%;
+      &.act{
+        background-image: url(../img/jiaozi/1-1.png);
+        background-size: 110% 110%;
+      }
+    }
+
+    .p2{
+      background-image: url(../img/jiaozi/2.png);
+      background-size: 90% 90%;
+      &.act{
+        background-image: url(../img/jiaozi/2-2.png);
+        background-size: 110% 110%;
+      }
+    }
+
+    .p3{
+      background-image: url(../img/jiaozi/3.png);
+      background-size: 90% 90%;
+      &.act{
+        background-image: url(../img/jiaozi/3-3.png);
+        background-size: 110% 110%;
+      }
+    }
+
+    .p4{
+      background-image: url(../img/jiaozi/4.png);
+      background-size: 90% 90%;
+      &.act{
+        background-image: url(../img/jiaozi/4-4.png);
+        background-size: 110% 110%;
+      }
+    }
+
+  }
+  .show{
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    .banner{
+      width: 100%;
+      height: 3rem;
+      img{
+        width: 90%;
+        height: 88%;
+      }
+    }
+    .title{
+      width: 2rem;
+    }
+    .text{
+      color: #73092b;
+      font-size: .24rem;
+      font-weight: 500;
+      text-align: center;
+      p+p{
+        margin-top: .1rem;
+      }
+    }
+  }
+}
+
+
+// 分享拆红包
+#sharePage{
+  background: url("../img/share-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  #share{
+   .btn;
+    background: url("../img/btn-2.png") no-repeat center;
+    background-size: 100% 100%;
+  }
+  .zhufu{
+    .center(-50%);
+    bottom: 23%;
+    width: 100%;
+    color: #73092b;
+    font-size: .28rem;
+    font-weight: 500;
+    text-align: center;
+    p+p{
+      margin-top: .1rem;
+    }
+  }
+}
+
+
+// 领红包，再包一个
+#luckPage{
+  background: url("../img/red-bag-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  img{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -2.22rem;
+    width: 4.4rem;
+    height: 5.4rem;
+  }
+  #luck{
+    .btn;
+    background: url("../img/btn-3.png") no-repeat center;
+    background-size: 100% 100%;
+  }
+}
+
+//外部打开页面
+#openPage{
+  background: url("../img/share-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  #get{
+    .btn;
+    background: url("../img/btn-4.png") no-repeat center;
+    background-size: 100% 100%;
+  }
+  .zhufu{
+    .center(-50%);
+    bottom: 23%;
+    width: 100%;
+    color: #73092b;
+    font-size: .28rem;
+    font-weight: 500;
+    text-align: center;
+    p+p{
+      margin-top: .1rem;
+    }
+  }
+}
+
+
+//历史记录
+#history{
+  font-size: 0.24rem;
+  .top{
+    padding: 0 0.3rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    color: #9ca0af;
+    background: #fff;
+    img{
+      width: 0.28rem;
+      height: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: -0.03rem;
+    }
+    span{
+      line-height: 0.4rem;
+      padding-left: 0.2rem
+    }
+  }
+  .title{
+    text-align: center;
+    margin-top: 0.1rem;
+  }
+  .historyBox{
+    margin-top: 0.2rem;
+    padding: 0 0.3rem;
+    font-size: 0.23rem;
+    p{
+      background: #fff;
+      zoom: 1;
+      padding: 0.2rem 0.2rem;
+      .clearfix;
+      &:after{
+        content: " ";
+        display: table;
+        clear: both;
+        visibility: hidden;
+        font-size: 0;
+        height: 0;
+      }
+      span{
+        display: block;
+        float: left;
+      }
+      .name{
+        width: 30%;
+      }
+      .time{
+        width: 50%;
+      }
+      .status{
+        width: 20%;
+      }
+    }
+    p + p{
+      margin-top: 0.1rem;
+    }
+  }
+}
+
+// 我的奖品&活动规则
+.myPrize{
+  position: absolute;
+  width: 1.1rem;
+  height: 1.1rem;
+  top: 0;
+  left: 0;
+  background-image: url(../img/myPrize.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.rule{
+  position: fixed;
+  width: 0.9rem;
+  height: 0.35rem;
+  top: 0.2rem;
+  right: 0.2rem;
+  background-image: url(../img/rule.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.ruleWrap{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: none;
+  .con{
+    color: #fff;
+    width: 80%;
+    background: #009cff;
+    border-radius: 10px;
+    padding: 0.3rem;
+    margin: 1.7rem auto 0;
+    .title{
+      color: #fff;
+      text-align: center;
+      font-size: 0.28rem;
+      span{
+        font-size: 0.24rem;
+        margin: 0 0.1rem;
+      }
+    }
+    .text{
+      font-size: 0.21rem;
+      line-height: 1.8;
+      padding-top: 0.2rem;
+    }
+    .border{
+      border-top: 1px dashed #fff;
+      margin-top: 0.1rem;
+    }
+  }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>勾心斗饺领红包</title>
+    <script>
+      (function(doc ,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+              docEl.style.fontSize = '100px';
+            }else{
+              docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+            }
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }(document, window));
+    </script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body id="luckPage">
+
+    <span class="myPrize"></span>
+    <span class="rule"></span>
+    <img class="redbag wobble" src="./img/red-bag.png" alt="hongbao">
+    <div id="luck"></div>
+
+    <div class="ruleWrap wrap">
+        <div class="con">
+            <p class="title"><span>●</span>活动规则<span>●</span></p>
+            <p class="text">中奖说明：<br>活动期间用户可制作福饺并分享之后获得奖励，单个用户每天有3次抽奖机会。</p>
+            <p class="border"></p>
+            <p class="text">1.活动时间：2月15日—2月21日</p>
+            <p class="text">2.奖品设置：iPhoneX、iPad2、快牙水壶、快牙抱枕、随机话费、随机牙豆等奖励</p>
+            <p class="text">3.实物奖品在活动结束后7个工作日内发货</p>
+            <p class="text">4.如发现违规作弊嫌疑，将取消参与活动资格</p>
+            <p class="text">5.本活动最终解释权归快牙官方所有</p>
+        </div>
+    </div>
+</body>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/dialog.js"></script>
+<script src="js/zapya.js"></script>
+<script src="js/ztool.js"></script>
+<script>
+    $(function () {
+      // mark还有url要改
+      //var url     = 'http://lottery.kuaiya.cn';
+      var mark = 'spring',
+          url  = 'http://210.73.213.236:9392',
+          ut   = Zapya.getToken(), //获取用户TOKEN
+       sToken  = null;
+
+      //再做一次
+      $("#luck").on("tap", function () {
+        window.location = "./index.html";
+      })
+      //奖品记录
+      $('.myPrize').click(function(){
+        window.location.href = './luckhistory.html';
+      });
+      //抽奖页规则和奖品提示
+      $('.rule').click(function(){
+        $('.ruleWrap').fadeIn(300);
+      });
+      $('.wrap').click(function(){
+        $(this).fadeOut(300);
+      });
+
+      setTimeout(function () {
+        $(".redbag").removeClass("wobble");
+        getLotteryInfo ();
+      },1600)
+
+      //获取抽奖信息（获取ltoken然后传给showLottery方法拿到status，token和奖品show的name、type）
+      function getLotteryInfo () {
+        $.ajax({
+          type : 'GET',
+          url : url + '/active/noactive',
+          data : 'ut='+ ut +'&mark='+ mark + '&uid=' + Zapya.getUserId() + '&uuid=' + Zapya.getUUID(),
+          dataType : "json",
+          success : function ( result ) {
+            console.log(result);
+            if(result != null) {
+              showLottery( result.ltoken );//获取抽奖结果
+            }
+          },
+          error: function () {
+            Ztool.opMsgBox({strText : '系统错误，请稍后再试', duration : 2000});
+          }
+        })
+      }
+
+      //通过getLotteryInfo方法拿到ltoken请求得到奖品信息然后传给转盘回调展示奖品弹窗
+      function showLottery( lToken ) {
+        $.ajax({
+          type : 'GET',
+          url :  url + '/active/lottery',
+          data : 'ut='+ ut +'&mark='+ mark +'&ltoken='+ lToken + '&uuid=' + Zapya.getUUID(),
+          timeout : 10000,
+          dataType : "json",
+          success : function ( result ) {
+            console.log(result);
+            if ( result ) {
+              var status = result.status;//抽奖状态
+              var Obj = result.show;//奖品名称
+              switch (status) {
+                case 1 : //状态为1的时候显示抽奖结果
+                  //抽取到奖品
+                  sToken = result.token;
+                  Dialog({
+                    title: "恭喜您",
+                    info: Obj.name,
+                    btnText: "确定",
+                    footer: true,
+                    type: Obj.type,
+                    btnEvent : function(){
+                      submit();
+                    }
+                  });
+                  break;
+                case 0 :
+                  //没有抽取到奖品
+                  Dialog({title: "很遗憾", info: "您未获得奖品", btnText: "确定", footer: true, type: 0});
+                  break;
+                case -1 :
+                  Ztool.opMsgBox({strText : '不在活动时间内~', duration : 2000});
+                  break;
+                case -2 :
+                  Ztool.opMsgBox({strText : '先参加活动才能抽奖', duration : 2000});
+                  break;
+                case -5 :
+                  Ztool.opMsgBox({strText : '请勿重复点击', duration : 2000});
+                  break;
+                case -6 :
+                  Ztool.opMsgBox({strText : '今日抽奖机会已用完，请明天再来', duration : 2000});
+                  break;
+                default :
+                  Ztool.opMsgBox({strText : '请稍候再试', duration : 2000});
+              }
+            }
+          },
+          error : function(result){
+            console.log(result);
+          }
+        })
+      }
+
+      //提交表单
+      function submit(){
+        var data = {};
+        //遍历input给然后data赋值
+        $('#Dialog').find("input").each(function(index, el){
+          data[el.name] = $.trim(el.value);
+        });
+        //验证数据格式
+        for (var fn in data ) {
+          var msg = formReg[fn](data[fn]);
+          if (msg) {
+            Ztool.opMsgBox({ strText : msg, duration : 3000});
+            return;
+          }
+        }
+        console.log(data);
+        //添加用户数据
+        data.ut    = ut;
+        data.mark  = mark;
+        data.token = sToken;
+        // 提交数据
+        $.ajax({
+          type : 'GET',
+          url : url+'/active/saveAddress',
+          data : data,
+          dataType : "JSON",
+          success : function (result) {
+            console.log(result);
+            if( result && result.status == 1 ){
+              Ztool.opMsgBox({strText:'领取成功',bgColor:'#000',fontColor:'white',duration:3000});
+            } else {
+              Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+            }
+            $('#Dialog').fadeOut();
+          },
+          error : function (msg) {
+            console.log(msg);
+            Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+          }
+        })
+      }
+
+      // 验证数据格式
+      var formReg = {
+        "mobile" : function(val) {
+          if (val=="") {
+            return "请填写手机号码"
+          } else if ( !/^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\d{8}$/.test(val) ) {
+            return "手机号码格式不正确"
+          }
+        },
+        "name" : function(val) {
+          if (val=="") {
+            return "请填写您的姓名"
+          }
+        },
+        "address" : function (val) {
+          if (val=="") {
+            return "请填写您的地址"
+          }
+        }
+      }
+    })
+
+
+
+</script>
+<script src="https://cdn.bootcss.com/eruda/1.4.0/eruda.min.js"></script>
+<script>eruda.init();</script>
+
+</html>

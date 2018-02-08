@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>勾心斗饺领红包</title>
+    <script>
+      (function(doc ,win){
+        var docEl = doc.documentElement,
+          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+          recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            if(clientWidth>=640){
+              docEl.style.fontSize = '100px';
+            }else{
+              docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+            }
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }(document, window));
+    </script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body id="openPage">
+    <div class="zhufu">
+        <p>您的好友送您一碗福饺，里面可能</p>
+        <p>有iPhonex等红包大奖哦~</p>
+    </div>
+<a id="get"></a>
+</body>
+<script src="js/zepto.min.js"></script>
+<script src="js/ztool.js"></script>
+
+<script>
+  $(function () {
+    $("#get").on("click", function (e) {
+//        e.preventDefault();
+        var zUid = '';
+        var zPath = '';
+        var schemaUrl = encodeURIComponent('zapya://open/?resDetail='+zUid+'&path='+zPath+'');
+        var zHrefAndroid = "zapya://open/?resDetail="+zUid+"&path="+encodeURIComponent(zPath);
+        var zHrefIos = "https://zapya.cn/open/?resDetail="+zUid+"&path="+encodeURIComponent(zPath);
+        var wx_zapya_android = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dewmobile.kuaiya&android_scheme="+schemaUrl;
+        var DW_URLS = { //全部下载链接
+          zapya_download_url    : "http://downloadz.dewmobile.net/Official/Kuaiya51TT.apk",
+          zapya_download_url_en : "http://binaries.izapya.com/Izapya/Andriod/Official_version/Zapya504-115009.apk",
+          zapyaios              : "https://itunes.apple.com/cn/app/kuai-yazapya/id576309271?mt=8",
+          wx_zapya_ios          : "http://a.app.qq.com/o/simple.jsp?pkgname=com.dewmobile.kuaiya"
+        };
+      Ztool.openZapya(e,{
+          wx_ios:DW_URLS.wx_zapya_ios,
+          ios: zHrefIos,
+          android: zHrefAndroid,
+          wx_android: wx_zapya_android
+        },function (isOpened) {
+          if(isOpened === 0){   //不能打开快牙就下载
+            Ztool.downloadZapya(DW_URLS);
+          }
+        });
+      });
+
+  })
+
+</script>
+<script src="https://cdn.bootcss.com/eruda/1.4.0/eruda.min.js"></script>
+<script>eruda.init();</script>
+</html>
