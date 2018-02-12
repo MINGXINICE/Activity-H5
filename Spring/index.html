@@ -24,6 +24,16 @@
     </script>
     <link rel="stylesheet" href="./css/index.css">
 </head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?a9e396c7461222f9237d9795e1e13de0";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
 <body id="index">
     <span class="myPrize"></span>
     <span class="rule"></span>
@@ -52,7 +62,7 @@
             <p class="title"><span>●</span>活动规则<span>●</span></p>
             <p class="text">中奖说明：<br>活动期间用户可制作福饺并分享之后获得奖励，单个用户每天有3次抽奖机会。</p>
             <p class="border"></p>
-            <p class="text">1.活动时间：2月15日—2月21日</p>
+            <p class="text">1.活动时间：2月14日—2月21日</p>
             <p class="text">2.奖品设置：iPhoneX、iPad2、快牙水壶、快牙抱枕、随机话费、随机牙豆等奖励</p>
             <p class="text">3.实物奖品在活动结束后7个工作日内发货</p>
             <p class="text">4.如发现违规作弊嫌疑，将取消参与活动资格</p>
@@ -63,43 +73,51 @@
 <script src="js/zepto.min.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/text.js"></script>
+<script src="js/zapya.js"></script>
 <script>
     $(function () {
-      var selcted = item[0];
-      select(selcted);
-      $(".bar span").on("tap", function () {
-        var index = $(this).index();
-        $(this).addClass('act').siblings().removeClass('act');
-        selcted = item[index];
-        select(selcted)
-      })
-      function select(selcted){
-        var htmlCodes = [
-          '<div class="banner">',
-          '            <img src='+selcted.img +' alt="">',
-          '        </div>',
-          '        <img class="title" src='+selcted.title +' alt="">',
-          '        <div class="text">',
-          '            <p>'+selcted.p1 +'</p>',
-          '            <p>'+selcted.p2 +'</p>',
-          '        </div>'
-        ].join("");
-        $(".show").html(htmlCodes);
+      if(!Zapya.isLogin()){
+        Zapya.login()
+      }else{
+        var selcted = item[0];
+        select(selcted);
+        $(".bar span").on("tap", function () {
+          var index = $(this).index();
+          $(this).addClass('act').siblings().removeClass('act');
+          selcted = item[index];
+          select(selcted)
+        })
+        function select(selcted){
+          var htmlCodes = [
+            '<div class="banner">',
+            '            <img src='+selcted.img +' alt="">',
+            '        </div>',
+            '        <img class="title" src='+selcted.title +' alt="">',
+            '        <div class="text">',
+            '            <p>'+selcted.p1 +'</p>',
+            '            <p>'+selcted.p2 +'</p>',
+            '        </div>'
+          ].join("");
+          $(".show").html(htmlCodes);
+        }
+        $("#make").on("click", function () {
+          _hmt.push(['_trackEvent', 'website', 'click', '开始包福饺', 1]);
+          window.location = "./share.html?type="+ selcted.id;
+        })
+        //奖品记录
+        $('.myPrize').click(function(){
+          window.location.href = './luckhistory.html';
+        });
+        //抽奖页规则和奖品提示
+        $('.rule').click(function(){
+          $('.ruleWrap').fadeIn(300);
+        });
+        $('.wrap').click(function(){
+          $(this).fadeOut(300);
+        });
+
       }
-      $("#make").on("tap", function () {
-        window.location = "./share.html?type="+ selcted.id;
-      })
-      //奖品记录
-      $('.myPrize').click(function(){
-        window.location.href = './luckhistory.html';
-      });
-      //抽奖页规则和奖品提示
-      $('.rule').click(function(){
-        $('.ruleWrap').fadeIn(300);
-      });
-      $('.wrap').click(function(){
-        $(this).fadeOut(300);
-      });
+
     })
 </script>
 </html>

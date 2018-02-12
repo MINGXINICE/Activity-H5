@@ -233,34 +233,6 @@ Ztool.addInstallGuid = function() {
     $('#show_box').css("margin-bottom","1.4rem;")
 };
 
-
-
-/**
- * 下载快牙
- */
-function downloadZapya(urls){
-    var pid                   = GetUrlString('p'); //判断中英文版本信息;
-    var url                   = "";
-    if(Ztool.is_weixin()){
-        if(Ztool.is_ios()){
-            url = urls.zapyaios;
-        }else{
-            url = urls.wx_zapya_android;
-        }
-    }else{
-        if(Ztool.is_ios()){
-            url = urls.zapyaios;
-        }else{
-            if(pid==5){
-                url= urls.zapya_download_url_en;//英文
-            }else{
-                url = urls.zapya_download_url;//默认中文
-            }
-        }
-    }
-    window.location.href = url;
-};
-
 /**
  * 检测是否能打开快牙，不能打开则执行回调
  */
@@ -308,7 +280,7 @@ Ztool.openZapya = function(e,zHref,cb) {
  * 下载快牙
  */
 Ztool.downloadZapya = function(urls){
-    var pid                   = GetUrlString('p'); //判断中英文版本信息;
+    var pid                   = Ztool.getQueryString('p') || ''; //判断中英文版本信息;
     var url                   = "";
     if(Ztool.is_weixin()){
         if(Ztool.is_ios()){

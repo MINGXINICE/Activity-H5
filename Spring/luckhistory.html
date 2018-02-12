@@ -24,16 +24,17 @@
         doc.addEventListener('DOMContentLoaded', recalc, false);
       }(document, window));
 	</script>
-	<!--<script>-->
-		<!--var _hmt = _hmt || [];-->
-		<!--(function() {-->
-			<!--var hm = document.createElement("script");-->
-			<!--hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";-->
-			<!--var s = document.getElementsByTagName("script")[0];-->
-			<!--s.parentNode.insertBefore(hm, s);-->
-		<!--})();-->
-	<!--</script>-->
 </head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?a9e396c7461222f9237d9795e1e13de0";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
 <body id="history">
 
 <div class="top">
@@ -75,10 +76,9 @@
 //  }
 // });
 
-// var mark = 'zhuibu';
-var url  = 'http://210.73.213.236:9392';
-var mark = 'spring';
-//var url  = 'http://lottery.kuaiya.cn';
+//var url  = 'http://210.73.213.236:9392';
+var mark = '2018CHUNJIE';
+var url  = 'http://lottery.kuaiya.cn';
 var ut   = Zapya.getToken();
 var sToken = '';
 
@@ -174,13 +174,13 @@ var formReg = {
 						window.location.href = window.location.href + '?ok=ok';
 					},500)
 	       } else {
-	         Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+	         Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',duration:3000});
 	       }
 	       $('#Dialog').fadeOut();
 	     },
 	     error : function (msg) {
 	       console.log(msg);
-	       Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',bgColor:'#fff',fontColor:'red',duration:3000});
+	       Ztool.opMsgBox({strText:'抱歉，数据异常，领奖失败',duration:3000});
 	     }
 	   })
 	 }

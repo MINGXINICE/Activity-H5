@@ -24,18 +24,32 @@
     </script>
     <link rel="stylesheet" href="./css/index.css">
 </head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?a9e396c7461222f9237d9795e1e13de0";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
 <body id="sharePage">
 <div class="zhufu">
     <p>福饺包好啦！快去分享给大家吧~</p>
     <p>返回即可领取红包哦</p>
 </div>
-<div id="share"></div>
+
+<a href="javascript:;" id="share"></a>
+
+
 </body>
-<script src="js/zepto.min.js"></script>
-<script src="js/zapya.js"></script>
-<script src="js/ztool.js"></script>
+<script src="./js/zepto.min.js"></script>
+<script src="./js/zapya.js"></script>
+<script src="./js/ztool.js"></script>
 <script>
   $(function () {
+
     var query = Ztool.getQueryString("type");
     var desc = [
       "想挣钱不累还工资翻倍？那就收下这碗招财饺吧！",//招财
@@ -44,21 +58,61 @@
       "吃了这碗状元饺，学业事业双丰收"              //状元
     ]
 
-    $("#share").on("tap", function () {
-      // 快牙分享信息
-      var  _gShareIfo = {
-        title: '我的天呐！这碗饺子里面可能吃出iPhoneX！',
-        desc: desc[query],
-        url: window.location.href + '&z_tag=1234',
-        thumbnail: 'http://downloadg.dewmobile.net/weixin/prod/shengdan/share.jpg'// 分享图标
-      };
-      Zapya.share(_gShareIfo);
-    });
+    var htmlCodes = [
+      '<p>您的好友送您一碗福饺，里面可能</p>',
+      '        <p>有iPhonex等红包大奖哦~</p>'
+    ].join("");
+
+    if(!Zapya.isValidUser()){
+      $("#share").css({'background-image':'url("./img/btn-4.png")'});
+      $(".zhufu").html(htmlCodes);
+      $("#share").on("click", function (e) {
+        _hmt.push(['_trackEvent', 'website', 'click', '立即领取', 1]);
+        console.log("外部")
+        var zUid = '';
+        var zPath = '';
+        var schemaUrl = encodeURIComponent('zapya://open/?resDetail='+zUid+'&path='+zPath+'');
+        var zHrefAndroid = "zapya://open/?resDetail="+zUid+"&path="+encodeURIComponent(zPath);
+        var zHrefIos = "https://zapya.cn/open/?resDetail="+zUid+"&path="+encodeURIComponent(zPath);
+        var wx_zapya_android = "http://a.app.qq.com/o/simple.jsp?pkgname=com.dewmobile.kuaiya&android_scheme="+schemaUrl;
+        var DW_URLS = { //全部下载链接
+          zapya_download_url    : "http://downloadz.dewmobile.net/Official/Kuaiya51TT.apk",
+          zapya_download_url_en : "http://binaries.izapya.com/Izapya/Andriod/Official_version/Zapya504-115009.apk",
+          zapyaios              : "https://itunes.apple.com/cn/app/kuai-yazapya/id576309271?mt=8",
+          wx_zapya_ios          : "http://a.app.qq.com/o/simple.jsp?pkgname=com.dewmobile.kuaiya"
+        };
+        Ztool.openZapya(e,{
+          wx_ios:DW_URLS.wx_zapya_ios,
+          ios: zHrefIos,
+          android: zHrefAndroid,
+          wx_android: wx_zapya_android
+        },function (isOpened) {
+          if(isOpened == 0){   //不能打开快牙就下载
+            Ztool.downloadZapya(DW_URLS);
+          }
+        });
+      });
+    }else{
+
+
+      $("#share").on("tap", function () {
+        console.log("内部")
+        _hmt.push(['_trackEvent', 'website', 'click', '分享拆红包', 1]);
+        // 快牙分享信息
+        var  _gShareIfo = {
+          title: '我的天呐！这碗饺子里面可能吃出iPhoneX！',
+          desc: desc[query],
+          url: window.location.href + '&z_tag=1234',
+          thumbnail: 'http://downloadg.dewmobile.net/weixin/prod/Spring/share.png'// 分享图标
+        };
+        Zapya.share(_gShareIfo);
+      });
+    }
 
     Ztool.initWX({
       title : '我的天呐！这碗饺子里面可能吃出iPhoneX！',
       link  :  window.location.href,
-      imgUrl  : 'http://downloadg.dewmobile.net/weixin/prod/shengdan/share.jpg',
+      imgUrl  : 'http://downloadg.dewmobile.net/weixin/prod/Spring/share.png',
       desc  : desc[query]
     });
 
@@ -69,6 +123,6 @@
   }
 
 </script>
-<script src="https://cdn.bootcss.com/eruda/1.4.0/eruda.min.js"></script>
-<script>eruda.init();</script>
+<!--<script src="https://cdn.bootcss.com/eruda/1.4.0/eruda.min.js"></script>-->
+<!--<script>eruda.init();</script>-->
 </html>
