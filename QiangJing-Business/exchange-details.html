@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>兑换明细</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="exchange-details">
+
+  <div class="exchange-box">
+
+    <div class="item">
+      <div class="item-l">
+        <span class="name">兑换流量</span>
+        <span class="status finish">待兑换</span><br>
+        <span class="time">2017年12月11日</span>
+      </div>
+      <div class="item-r">
+        <span>-23</span>
+        <img src="./img/icon_change.png">
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-l">
+        <span class="name">兑换流量</span>
+        <span class="status wait">待兑换</span><br>
+        <span class="time">2017年12月11日</span>
+      </div>
+      <div class="item-r">
+        <span>-23</span>
+        <img src="./img/icon_change.png">
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-l">
+        <span class="name">兑换流量</span>
+        <span class="status finish">待兑换</span><br>
+        <span class="time">2017年12月11日</span>
+      </div>
+      <div class="item-r">
+        <span>-23</span>
+        <img src="./img/icon_change.png">
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-l">
+        <span class="name">兑换流量</span>
+        <span class="status wait">待兑换</span><br>
+        <span class="time">2017年12月11日</span>
+      </div>
+      <div class="item-r">
+        <span>-23</span>
+        <img src="./img/icon_change.png">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>我的钱包</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="wallet">
+
+  <!-- header -->
+  <div class="header">
+    <a href="./exchange-center.html" class="exchange"><p><img src="./img/icon_gift.png"><span>兑换</span></p></a>
+    <div class="moneyBox">
+      <p class="title">我在万能影视-赚了</p>
+      <p class="money">88.00 <span>元</span></p>
+    </div>
+  </div>
+
+  <!-- tab -->
+  <div class="tabWrap">
+    <div class="tabBox">
+      <a href="./rmb.html" class="item rmb">
+        <img src="./img/icon_rmb.png">
+        <p>人民币余额：<span>88.00</span></p>
+      </a>
+      <a href="./frmb.html" class="item frmb">
+        <img src="./img/icon_gold.png">
+        <p>金币余额：<span>88.00</span></p>
+      </a>
+    </div>
+  </div>
+
+  <!-- 规则 -->
+  <div class="ruleWrap">
+    <h2><img src="./img/sign_rule.png">规则介绍:</h2>
+    <div class="ruleList">
+      <p>1.看10分钟视频获得10个金币。</p>
+      <p>2.签到一天奖励10个金币</p>
+      <p>3.看10分钟视频获得10个金币。</p>
+      <p>4.签到一天奖励10个金币</p>
+      <p>5.看10分钟视频获得10个金币。</p>
+      <p>6.签到一天奖励10个金币</p>
+    </div>
+  </div>
+
+
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

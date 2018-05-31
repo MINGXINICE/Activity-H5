@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>兑换中心</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="exchange-center">
+
+  <!-- 兑换明细 -->
+  <div class="details">
+    <h2>
+      <span>兑换明细</span>
+      <a href="./exchange-details.html">收支一览<img src="./img/into_b.png"></a>
+    </h2>
+  </div>
+
+  <div style="background:#F5F5F6;height:0.15rem;"></div>
+
+  <!-- header -->
+  <div class="header">
+    <p class="header-l">
+      <span><b>目前可用:</b></span>
+      <span class="money">3</span>
+      <img src="./img/icon_change.png">
+    </p>
+    <p class="header-r">
+      <a href="./cardholder.html">我的卡包<img src="./img/into_r.png"></a>
+    </p>
+  </div>
+
+  <div class="shopBox">
+
+    <a href="./exchange-phone.html" class="item">
+      <span class="item-l">
+        <img src="./img/icon_cost.png">
+        <span>兑换话费</span>
+      </span>
+      <span class="item-r">100<img src="./img/icon_change.png">起</span>
+    </a>
+
+    <a href="././exchange-flow.html" class="item">
+      <span class="item-l">
+        <img src="./img/icon_flow.png">
+        <span>兑换流量</span>
+      </span>
+      <span class="item-r">100<img src="./img/icon_change.png">起</span>
+    </a>
+
+    <a href="./exchange-qb.html" class="item">
+      <span class="item-l">
+        <img src="./img/icon_gold.png">
+        <span>兑换Q币</span>
+      </span>
+      <span class="item-r">100<img src="./img/icon_change.png">起</span>
+    </a>
+
+    <a href="./exchange-vip.html" class="item">
+      <span class="item-l">
+        <img src="./img/icon_video.png">
+        <span>兑换视频会员</span>
+      </span>
+      <span class="item-r">100<img src="./img/icon_change.png">起</span>
+    </a>
+
+    <a href="./exchange-card.html" class="item">
+      <span class="item-l">
+        <img src="./img/icon_card.png">
+        <span>兑换购物卡</span>
+      </span>
+      <span class="item-r">100<img src="./img/icon_change.png">起</span>
+    </a>
+
+  </div>
+
+
+
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

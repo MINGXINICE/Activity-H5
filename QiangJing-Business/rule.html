@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>规则介绍</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="rule">
+
+  <div class="ruleWrap">
+
+    <div class="ruleItem">
+      <h4>规则介绍一:</h4>
+      <p>1.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>2.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>3.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+    </div>
+
+    <div class="ruleItem">
+      <h4>规则介绍二:</h4>
+      <p>1.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>2.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>3.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+    </div>
+
+    <div class="ruleItem">
+      <h4>规则介绍三:</h4>
+      <p>1.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>2.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+      <p>3.兑换成功后，请到 “我的卡包” 中查看会员激活码，并且妥善保管激活码</p>
+    </div>
+
+  </div>
+
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>人民币</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="rmb">
+
+  <!-- header -->
+  <div class="header">
+    <h4>总金额:</h4>
+    <h2>88.00 <span>元</span></h2>
+  </div>
+
+  <!-- 收支明细 -->
+  <div class="detailsWrap">
+    <h4>收支明细:</h4>
+    <div class="detailsList">
+
+      <div class="item">
+        <p class="l">
+          <span>金币兑换</span><br>
+          <span class="time">2017年12月11日</span>
+        </p>
+        <p class="r"><span class="frmb">+0.01元</<span></p>
+      </div>
+
+      <div class="item">
+        <p class="l">
+          <span>现金提现</span><br>
+          <span class="time">2017年12月11日</span>
+        </p>
+        <p class="r"><span class="rmb">-27.00元</<span></p>
+      </div>
+
+      <div class="item">
+        <p class="l">
+          <span>金币兑换</span><br>
+          <span class="time">2017年12月11日</span>
+        </p>
+        <p class="r"><span class="frmb">+0.01元</<span></p>
+      </div>
+
+      <div class="item">
+        <p class="l">
+          <span>现金提现</span><br>
+          <span class="time">2017年12月11日</span>
+        </p>
+        <p class="r"><span class="rmb">-27.00元</<span></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 立刻提现 -->
+  <div class="bank">立即提现</div>
+
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

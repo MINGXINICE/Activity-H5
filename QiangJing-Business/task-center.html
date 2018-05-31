@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>任务中心</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        if(clientWidth>=640){
+          docEl.style.fontSize = '100px';
+        }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+        }
+      };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="task-center">
+
+  <!-- 每日签到 -->
+  <div class="signInWrap">
+    <h2>
+      <span>每日签到</span><span>(已签到<b>2</b>天)</span>
+      <a href="./rule.html">签到规则<img src="./img/into_b.png"></a>
+    </h2>
+    <div class="signInBox">
+      <!-- 签到列表 -->
+      <div class="signInList">
+        <span class="act1"><img src="./img/gold_icon_sel.png"><p>已领取</p></span>
+        <span class="act1"><img src="./img/gold_icon_sel.png"><p>已领取</p></span>
+        <span class="act1"><img src="./img/gold_icon_sel.png"><p>已领取</p></span>
+        <span class="act2"><img src="./img/gold_icon_dis.png"><p>未领取</p></span>
+        <span class="act3"><img src="./img/gold_icon_nor.png"><p>已领取</p></span>
+        <span class="act3"><img src="./img/gold_icon_nor.png"><p>已领取</p></span>
+        <span class="act3"><img src="./img/gold_icon_nor.png"><p>已领取</p></span>
+      </div>
+      <!-- 进度条 -->
+      <h2><p class="w-3"></p></h2>
+      <!-- 签到按钮 -->
+      <div class="signInBtn">签到得10金币</div>
+    </div>
+
+  </div>
+
+
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/index.js"></script>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100%;height: 100%">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>我的徒弟</title>
+  <script type="text/javascript">
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          if (!clientWidth) return;
+          if(clientWidth>=640){
+            docEl.style.fontSize = '100px';
+          }else{
+            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+          }
+        };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+  </script>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body id="prentice">
+
+    <div class="container">
+        <div class="item clearfix">
+            <img src="img/master/testheader.jpg">
+            <div class="info">
+                <span>用户小白</span>
+                <span>2017年12月11日</span>
+            </div>
+            <div class="beprentice">成为了你的徒弟</div>
+        </div>
+
+        <div class="item clearfix">
+            <img src="img/master/testheader.jpg">
+            <div class="info">
+                <span>用户小白</span>
+                <span>2017年12月11日</span>
+            </div>
+            <div class="beprentice">成为了你的徒弟</div>
+        </div>
+
+        <div class="item clearfix">
+            <img src="img/master/testheader.jpg">
+            <div class="info">
+                <span>用户小白</span>
+                <span>2017年12月11日</span>
+            </div>
+            <div class="beprentice">成为了你的徒弟</div>
+        </div>
+    </div>
+
+</body>
+</html>
