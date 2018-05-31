@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>NEW YEAR IN ZAPYA</title>
+  <script>
+    (function(doc ,win){
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth= docEl.clientWidth;
+          if (!clientWidth) return;
+          docEl.style.fontSize = 100 * (clientWidth / 360) + 'px';
+        };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    }(document, window));
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e362bcca316798d8bee3675bb56fff5d";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<body id="home">
+
+  <!-- 首页 -->
+  <div id="page">
+    <span><img src="./img/door.png"></span>
+    <img src="./img/fire1.png" class="fire fire1">
+    <img src="./img/fire2.png" class="fire fire2">
+    <img src="./img/fire3.png" class="fire fire3">
+    <img src="./img/hand.png" class="hand">
+    <p class="title">You have received a new year's greeting card from a Zapya user<br>Tap to continue</p>
+  </div>
+
+  <div class="opcity"></div>
+
+  <!-- 收贺卡wrap -->
+  <!-- <div id="cardWrap" class="card-3">
+    <p class="title black">新春贺喜，让新春的风吹进你的屋子，让新春的雪飞进你的屋子，让我新春的祝愿，飘进你的心坎。</p>
+    <p class="from">来自中国</p>
+    <p class="footer">
+      <span class="btn-l">我也要寄贺卡</span>
+      <span class="btn-r">继续收集贺卡</span>
+    </p>
+  </div> -->
+
+  <!-- makeCard wrap -->
+  <div id="makeCardWrap">
+    <div class="cardBox">
+      <div class="list act"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+    </div>
+    <div id="makeText">
+      <!-- <textarea ></textarea> -->
+      <textarea placeholder="Type your greeting please(less than 50 words)" rows="3"  maxlength="50"></textarea>
+    </div>
+    <span id="makeBtn">Generate a card</span>
+  </div>
+
+  <!-- 预览贺卡 -->
+  <!-- <div id="lookCardWrap">
+    <div class="card card-1">
+      <p class="title black">新春贺喜，让新春的风吹进你的屋子，让新春的雪飞进你的屋子，让我新春的祝愿，飘进你的心坎。</p>
+      <p class="from">来自中国</p>
+    </div>
+    <div class="btnBox">
+      <span class="btn btn-l">返回</span>
+      <span class="btn btn-r">寄出贺卡</span>
+    </div>
+  </div> -->
+
+  <!-- 贺卡发送成功弹窗 -->
+  <div id="success">
+    <div class="text">Your card has been sent to <span>0</span> users</div>
+    <div class="btnBox">
+      <span class="btn btn-l">Create more</span>
+      <span class="btn btn-r">Collect cards</span>
+    </div>
+  </div>
+
+  <div id="welcome">0%</div>
+
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/cardWrap.js"></script>
+<script src="./js/index.js"></script>
+<script>
+  var imgs = [
+    './img/hand.png',
+    './img/1.jpg',
+    './img/2.jpg',
+    './img/3.jpg',
+    './img/4.jpg',
+    './img/cardBg-1.jpg',
+    './img/cardBg-2.jpg',
+    './img/cardBg-3.jpg',
+    './img/cardBg-4.jpg',
+    './img/door.gif',
+    './img/door.png',
+    './img/fire1.png',
+    './img/fire2.png',
+    './img/fire3.png',
+    './img/homeBg.jpg',
+    './img/mail.png',
+    './img/makeCardBg.jpg'
+  ]
+  var index = 0,
+      len = imgs.length,
+      count = 0;
+  $.each(imgs,function(i, src) {
+    var imgObj = new Image();
+    $(imgObj).on('load',function(){
+      $('#welcome').html(Math.round((count+1)/len*100)+'%');
+      if(count>=len-1){
+        $('#welcome').hide();
+      }
+      count++;
+    })
+    imgObj.src = src;
+  });
+</script>
+</html>

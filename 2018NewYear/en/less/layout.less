@@ -1,0 +1,393 @@
+#home{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	#page{
+		background-image: url(../img/homeBg.jpg);
+		background-repeat: no-repeat;
+		background-position: top left;
+		background-size: 100% 100%;
+		position: fixed;
+		top: 0;left: 0;bottom: 0;right: 0;
+		transition: transform 1.8s;
+		.hand{
+			width: 0.25rem;
+			height: auto;
+			position: absolute;
+			top: 4.6rem;left: 2rem;
+			animation: hand 1s infinite linear;
+			display: none;
+		}
+		.title{
+			width: 100%;
+			padding: 0 0.15rem;
+			position: absolute;
+			color: #fff;
+			line-height: 1.5;
+			text-align: center;
+			top: 1rem;
+		}
+		span{
+			display: block;
+			width: 0.34rem;
+			height: 0.57rem;
+			position: absolute;
+			top: 4.2rem;left: 2.1rem;
+			img{
+				width: 100%;
+				height: 100%;
+			}
+		}
+		.fire{
+			height: auto;
+			position: absolute;
+			animation: fire 1.5s infinite linear;
+			&.fire1{
+				width: 40%;
+				top: 0.8rem;left: 0.1rem;
+				animation-delay:0s;
+			}
+			&.fire2{
+				width: 30%;
+				top: 1.8rem;right: 0.2rem;
+				animation-delay:0.3s;
+			}
+			&.fire3{
+				width: 36%;
+				top: 0.2rem;right: 0.5rem;
+				animation-delay:0.5s;
+			}
+		}
+	}
+	.opcity{
+		position: absolute;
+		top: 0;left: 0;bottom: 0;right: 0;
+		background: rgba(0, 0, 0, 0.01);
+	}
+	// 收贺卡插件层
+	#cardWrap{
+		position: absolute;
+		top: 0;left: 0;bottom: 0;right: 0;
+		padding: 3.3rem 0.3rem 0;
+		background-repeat: no-repeat;
+		background-position: top left;
+		background-size: 100% 100%;
+		&.card-1{
+			background-image: url(../img/cardBg-1.jpg); //中国
+		}
+		&.card-2{
+			background-image: url(../img/cardBg-2.jpg); //英语
+		}
+		&.card-3{
+			background-image: url(../img/cardBg-3.jpg); //穆斯林
+		}
+		&.card-4{
+			background-image: url(../img/cardBg-4.jpg); //缅甸
+		}
+		.title{
+			color: #fff;
+			text-align: left;
+			line-height: 1.4;
+			&.black{
+				color: #333;
+			}
+		}
+		.from{
+			color: #777;
+			text-align: right;
+			margin-top: 0.1rem;
+		}
+		.footer{
+			width: 100%;
+			color: #000;
+			margin-top: 0.4rem;
+			.clearfix;
+			span{
+				padding: 0.8em 2em;
+				background: #ffe34c;
+				border-radius: 5px;
+				&.btn-l{float: right;;}
+				&.btn-r{float: left;;}
+			}
+		}
+	}
+	// 制作贺卡wrap
+	#makeCardWrap{
+		position: absolute;
+		top: 0;left: 0;bottom: 0;right: 0;
+		background-image: url(../img/makeCardBg.jpg);
+		background-repeat: no-repeat;
+		background-position: top left;
+		background-size: 100% 100%;
+		padding-top: 1rem;
+		padding-left: 0.2rem;
+		padding-right: 0.2rem;
+		display: none;
+		.cardBox{
+			width: 100%;
+			.clearfix;
+			.list{
+				float: left;
+				width: 1.55rem;
+				height: 1.2rem;
+				margin-bottom: 0.1rem;
+				background-repeat: no-repeat;
+				background-position: top left;
+				background-size: 100% 100%;
+				border: 2px solid #fff;
+				&.act{
+					border: 2px solid #f83430;
+				}
+				&:nth-child(2n){
+					margin-left: 0.1rem;
+				}
+				&:nth-child(1){
+					background-image: url(../img/1.jpg);
+				}
+				&:nth-child(2){
+					background-image: url(../img/2.jpg);
+				}
+				&:nth-child(3){
+					background-image: url(../img/3.jpg);
+				}
+				&:nth-child(4){
+					background-image: url(../img/4.jpg);
+				}
+			}
+		}
+		#makeText{
+			width: 100%;
+			textarea{
+				width: 100%;
+				height: 0.8rem;
+				border: 1px solid #333;
+				outline: none;
+				padding: 1em;
+			}
+		}
+		#makeBtn{
+			width: 50%;
+			padding: 0.8em 0;
+			background: #ffe34c;
+			border-radius: 5px;
+			display: block;
+			margin: 0.2rem auto 0;
+			text-align: center;
+		}
+	}
+	#lookCardWrap{
+		position: absolute;
+		top: 0;left: 0;bottom: 0;right: 0;
+		background: rgba(0, 0, 0, 0.8);
+		.card{
+			width: 76%;
+			height: 70%;
+			margin: 0.4rem auto 0;
+			border: 6px solid #f93430;
+			background-repeat: no-repeat;
+			background-position: top left;
+			background-size: 100% 100%;
+			padding: 2.5rem 0.2rem 0;
+			&.card-1{
+				background-image: url(../img/cardBg-1.jpg);
+			}
+			&.card-2{
+				background-image: url(../img/cardBg-2.jpg);
+			}
+			&.card-3{
+				background-image: url(../img/cardBg-3.jpg);
+			}
+			&.card-4{
+				background-image: url(../img/cardBg-4.jpg);
+			}
+			.title{
+				color: #fff;
+				font-size: 0.12rem;
+				line-height: 1.5;
+				&.black{
+					color: #333;
+				}
+			}
+			.from{
+				font-size: 0.12rem;
+				text-align: right;
+				margin-top: 0.2rem;
+				color: #666;
+			}
+		}
+		.btnBox{
+			width: 76%;
+			.clearfix;
+			margin: 0.2rem auto 0;
+			.btn{
+				width: 40%;
+				padding: 0.8em;
+				background: #f9e348;
+				border-radius: 5px;
+				display: block;
+				text-align: center;
+				&.btn-l{float: left;}
+				&.btn-r{float: right;;}
+			}
+		}
+	}
+	#success{
+		position: absolute;
+		top: 0;left: 0;right: 0;bottom: 0;
+		background: rgba(0, 0, 0, 0.8);
+		padding-top: 2rem;
+		display: none;
+		.text{
+			width: 80%;
+			background: #fff;
+			padding: 0.2rem;
+			border-radius: 10px;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.btnBox{
+			width: 80%;
+			.clearfix;
+			margin: 0.5rem auto 0;
+			.btn{
+				width: 40%;
+				padding: 0.8em;
+				background: #f9e348;
+				border-radius: 5px;
+				display: block;
+				text-align: center;
+				&.btn-l{float: left;}
+				&.btn-r{float: right;;}
+			}
+		}
+	}
+	#welcome{
+		position: fixed;
+		top: 0;left: 0;bottom: 0;right: 0;
+		background: #25428c;
+		color: #fff;
+		text-align: center;
+		font-size: 30px;
+		// padding-top: 2rem;
+		padding-top: 200px;;
+	}
+}
+
+//弹框插件
+#Dialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 999999;
+	.dialog-box{
+    width: 80%;
+    position: absolute;
+    top: 28%;
+    left: 50%;
+		margin-left: -40%;
+    background: #fefefe;
+    border-radius: 10px;
+		border-radius: 20px;
+		overflow: hidden;
+    background: #6b7fd4;
+    .dialog-close{
+      position: absolute;
+      width: 0.5rem;
+      height: 0.5rem;
+      right: 0;top: 0;
+      text-align: center;
+      line-height: 0.4rem;
+      color: #fff;
+      font-size: 0.4rem;
+    }
+		.dialog-title{
+		  text-align: center;
+		  font-size: 0.16rem;
+		  color: #fff;
+		  padding: 1em;
+		}
+		.dialog-info{
+		  text-align: center;
+			line-height: 1.5;
+		  font-size: 0.14rem;
+		  color: #fff;
+		}
+    .dialog-form{
+      padding: 1em 1em 0;
+      input{
+        width: 100%;
+        margin-bottom: 0.5em;
+        border-radius: 5px;
+        font-size: 0.14rem;
+        border: 0;
+        color: #222;
+        padding: 0.08rem 1em;
+      }
+    }
+		.dialog-footer{
+	    width: 100%;
+	    text-align: center;
+      margin-top: 0.1rem;
+      border-top: 1px solid #435dc9;
+			#dialog-btn{
+        color: #fff;
+				display: block;
+				padding: 0.1rem;
+				font-size: 0.16rem;
+			}
+		}
+	}
+}
+
+//默认提示框
+#msgbox{
+  position: fixed;
+  top:50%;
+  left:50%;
+	width: 70%;
+  -webkit-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+  background: rgba(0,0,0,.8);
+  padding: 0.1rem 0.1rem;
+  font-size: 0.14rem;
+  color: #fff;
+	text-align: center;
+	z-index: 999999;
+}
+
+@keyframes fire {
+	from{
+		opacity: 0.2;
+		transform: scale(0.5);
+	}
+	to{
+		transform: scale(1);
+	}
+}
+
+@keyframes hand {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -10px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+  }
+  @-webkit-keyframes myfirst {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -10px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+  }
