@@ -1,0 +1,297 @@
+﻿@charset "utf-8";
+/* 基础css  清除默认样式*/
+/*=====================reset start=====================*/
+*{ 
+    padding:0; margin:0;
+}
+h1,h2,h3,h4,h5,h6{ 
+    font-size:100%; 
+    line-height:100%; 
+    font-weight:normal;
+}
+body{ 
+    font-size:12px;
+}
+a{ 
+    text-decoration:none; 
+    color:#000;
+}
+i,em{ 
+    font-style:normal;
+}
+b,strong{ 
+    font-weight:normal;
+}
+input{
+    outline:none; 
+    border:none 0;
+    padding:0;
+}
+a img{
+    border:0;
+}/*a包img：去蓝色边框*/
+img{
+    display:block;
+}/*a包img：去3像素bug*/
+li{ 
+    list-style:none; 
+    vertical-align:top;
+}/*li里浮动,li不浮动，去3像素bug*/
+table,th,td,tr{  
+    padding:0;
+}
+table{
+    border-collapse:collapse;
+}
+/*=====================function start=====================*/
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
+.clearfix:after, .clearfix:before {
+    display:table;
+    clear:both;
+    content:'';
+}
+.clearfix {
+    zoom:1;
+}
+.fellipsis { //显示省略
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.finblock {
+    display: inline-block;
+}
+/*=====================提示框 start=====================*/
+#msgbox{
+    position: fixed;
+    width: 80%;
+    top: 40%;
+    left: 10%;
+    text-align: center;
+    z-index: 999999;
+}
+#msgtext{
+    display: inline-block;
+    background: rgba(0,0,0,.6);
+    padding: 0.2rem 0.3rem;
+    line-height:0.4rem;
+    font-size: 0.3rem;
+    color: #fff;
+    word-break:break-all;
+}
+.fadeIn {
+    -webkit-animation: fadeIn 1s ease both;
+    animation: fadeIn 1s ease both;
+}
+@-webkit-keyframes fadeIn {
+    0%   {
+        opacity:0; 
+    }
+    25%  {
+        opacity:0.2;
+    }
+    100%  {
+        opacity:0.8; 
+    }
+}
+@keyframes fadeIn {
+    0%   {
+        opacity:0; 
+    }
+    25%  {
+        opacity:0.2;
+    }
+    100%  {
+        opacity:0.8;
+        
+    }
+}
+/*======================快牙外的引导页 start=================================*/
+.install_guid{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1.4rem;
+    background-color: rgba(0,0,0,.8);
+    z-index: 9999;
+    display: block;
+}
+#install_img{
+    width: 100%;
+    height: 100%;
+}
+#install_btn{
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-radius: 0.1rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.4rem;
+    right: 0.2rem;
+    background: #f65251;
+    font-size: 0.36rem;
+    color: #fff;
+    text-align: center;
+    padding: 0 0.1rem;
+}
+
+/*===============横屏提示===================*/
+@media screen and (orientation:portrait) {
+    .lock_wrp {
+        display: none!important
+    }
+}
+.lock_wrp {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    background-color: #32373b;
+    color: rgba(255,255,255,.8);
+    z-index: 9999;
+}
+.lock {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 250px;
+    height: 150px;
+    margin: -75px 0 0 -125px;
+    text-align: center
+}
+.lock i {
+    position: relative;
+    display: block;
+    width: 74px;
+    height: 110px;
+    background: url(img/phone.png) 0 0 no-repeat;
+    background-size: 100%;
+    margin: 0 auto;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-animation: iphone 1.6s ease-in infinite;
+    animation: iphone 1.6s ease-in infinite
+}
+@-webkit-keyframes iphone {
+    0% {
+        -webkit-transform:rotate(-90deg)
+    }
+    25% {
+        -webkit-transform:rotate(0deg)
+    }
+    50% {
+        -webkit-transform:rotate(0deg)
+    }
+    75% {
+        -webkit-transform:rotate(-90deg)
+    }
+    100% {
+        -webkit-transform:rotate(-90deg)
+    }
+}
+@keyframes iphone {
+    0% {
+        transform:rotate(-90deg)
+    }
+    25% {
+        transform:rotate(0deg)
+    }
+    50% {
+        transform:rotate(0deg)
+    }
+    75% {
+        transform:rotate(-90deg)
+    }
+    100% {
+        transform:rotate(-90deg)
+    }
+}
+/*====================== 弹层 ========================*/ 
+.layer_box{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    // display: none;
+    z-index: 999;
+}
+.layer_cont{
+    width: 5.8rem;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 80%;
+    -webkit-transform-origin:50% 50%;
+    -webkit-transform:translate3d(-50%,-50%,0);
+    transform-origin:50% 50%;
+    transform:translate3d(-50%,-50%,0);
+    border-radius: 0.2rem;
+    background:#6b7fd4;
+}
+.layer_title{
+    width: 5rem;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.34rem;
+    color: #fff;
+    text-align: center;
+}
+.layer_text{
+    width: 5rem;
+    padding: 0 0.4rem 0.3rem 0.4rem;
+    line-height: 0.5rem;
+    font-size: 0.3rem;
+    color: #fff;
+    font-family:  "黑体";
+    text-align: center;
+}
+#userPhone,
+#userName,
+#userAddress{
+    width: 4.8rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin-left: 0.5rem;
+    font-size: 0.3rem;
+    color: #354483;
+    font-family:  "黑体";
+    border-radius: 0.1rem;
+    text-indent: 0.2rem;
+    margin-bottom: 0.4rem;
+}
+.layer_btn_group{
+    text-align: right;
+    padding-right: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+.layer_btn_group .layer_btn{
+    margin-left: 0.3rem;
+    font-family: "黑体";
+    font-size: 0.38rem;
+    color: #fff;
+}
+.layer_btn_group .layer_btn_cancel{
+    color: rgba(0,0,0,0.5);
+}
+.layer_close_btn{
+    position: absolute;
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #fbbfbf;
+    top: -0.4rem;
+    right: -0.4rem;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 0.7rem;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    color: #fff;
+}

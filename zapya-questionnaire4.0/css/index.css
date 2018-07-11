@@ -1,0 +1,146 @@
+body{ 
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+	font-family: '微软雅黑','arial','黑体';
+}
+img{
+	width: 100%;
+	height: 100%;
+}
+.kuaiyawenjuan {
+	width: 3.33rem;
+	height: 0.79rem;
+	margin: 0 auto;
+}
+main {
+	width: 6rem;
+	margin: 0.4rem auto;
+	font-size: 0.3rem;
+}
+/*首页*/
+section{
+	background: url("img/over.png") no-repeat;
+	background-size: 100%;
+	/*background-color: #f0ad4e;*/
+}
+.question {
+	/*margin-bottom: 0.4rem;*/
+	background: url("img/questionbg.png") no-repeat;
+	background-size: 100% 100%;
+
+}
+.question .option {
+	position: relative;
+	/*float: left;*/
+	color: #f8eabb;
+	min-width: 50%;
+	margin: 0.2rem .2rem 0 0;
+	box-sizing: border-box;
+	text-shadow: none;
+}
+.question .option span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.question .option .option-icon {
+	/*position: absolute;*/
+	/*left: -0.4rem;*/
+	/*top: 0.05rem;*/
+	width: 0.59rem;
+	height: 0.6rem;
+	margin-left: .1rem;
+}
+
+.question .radio .option-icon {
+	/*background: url(img/select_spirit_radio.png) no-repeat 0 0;*/
+	/*-webkit-background-size: 0.62rem 0.3rem;*/
+	/*background-size: 0.62rem 0.3rem;*/
+	background: url(img/select_spirit_checkbox2.0.png) no-repeat 0 0;
+	-webkit-background-size: 1.24rem 0.6rem;
+	background-size: 1.24rem 0.6rem;
+}
+.question .radio.checked .option-icon {
+	/*background: url(img/select_spirit_radio.png) no-repeat -0.32rem 0;*/
+	/*-webkit-background-size: 0.62rem 0.3rem;*/
+	/*background-size: 0.62rem 0.3rem;*/
+	background: url(img/select_spirit_checkbox2.0.png) no-repeat -0.64rem 0;
+	-webkit-background-size: 1.24rem 0.6rem;
+	background-size: 1.24rem 0.6rem;
+}
+.question .checkbox .option-icon {
+	/*background: url(img/select_spirit_checkbox2.0.png) no-repeat 0 0;*/
+	/*-webkit-background-size: 0.62rem 0.3rem;*/
+	/*background-size: 0.62rem 0.3rem;*/
+	background: url(img/select_spirit_checkbox2.0.png) no-repeat 0 0;
+	-webkit-background-size: 1.24rem 0.6rem;
+	background-size: 1.24rem 0.6rem;
+}
+.question .checkbox.checked .option-icon {
+	background: url(img/select_spirit_checkbox2.0.png) no-repeat -0.64rem 0;
+	-webkit-background-size: 1.24rem 0.6rem;
+	background-size: 1.24rem 0.6rem;
+}
+.question textarea {
+	margin: 0.5rem auto 0;
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.2rem 0;
+	font-size: 0.28rem;
+	resize: none;
+	text-indent: 1em;
+	line-height: 0.4rem;
+}
+#submitBtn {
+	width: 3.08rem;
+	height: 1.16rem;
+	margin: 0 auto;
+	margin-top: 1rem;
+}
+
+footer {
+	margin-bottom: 0.5rem;
+}
+.num_tip {
+	position: fixed;
+	bottom: 0.2rem;
+	right: 0.3rem;
+	font-size: 0.28rem;
+	color: #efc000;
+}
+.num_tip .col_light_yellow {
+	color: #fae686;
+}
+.point{
+	color: #fff;
+	font-weight: 600;
+	text-align: center;
+}
+.title{
+	color: #fff000;
+	text-shadow: none;
+}
+#open{
+	background: url("img/open.png") no-repeat;
+	background-size: 100% 100%;
+}
+.begin{
+	margin: 0 auto;
+	margin-top: 8.5rem;
+	width: 3.08rem;
+	height: 1.16rem;
+	background: url("img/begin.png") no-repeat;
+	background-size: 100% 100%;
+}
+.next{
+	display: block;
+	width: 3.08rem;
+	height: 1.16rem;
+	margin:0 auto;
+	margin-top: .5rem;
+	background: url("img/next.png") no-repeat;
+	background-size: 100% 100%;
+}
+.quewraper{
+	box-sizing: border-box;
+	height: 9rem;
+	margin: 0 .7rem;
+}

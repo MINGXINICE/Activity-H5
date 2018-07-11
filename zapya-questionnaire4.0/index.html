@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>快牙有奖小调查</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.css">
+    <script src="jquery-mobile/jquery.js"></script>
+    <script src="jquery-mobile/jquery.mobile-1.4.5.js"></script>
+    <script src="js/phone-rem.js"></script>
+    <script src="js/zepto.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script src="activity.js"></script>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="./js/zapya.js"></script>
+<!--<script src="//cdn.jsdelivr.net/eruda/1.2.0/eruda.min.js"></script>-->
+<!--<script>eruda.init();</script>-->
+<script>
+  var json = jsonData;
+  var _gUrl         =  'http://lottery.kuaiya.cn';
+  var _gUUid        = Zapya.getUUID();;
+  var _gMark        = 'QUESTION201710';
+  var _gVersionCode = Zapya.getVersionCode();
+  var _gUid         = Zapya.getUserId();
+  var questionArr   = json.questions;
+  var totalAnswer   = [];
+
+  render()
+
+  window.location = 'http://downloadg.dewmobile.net/weixin/prod/zapya-questionnaire4.0/index.html#page0';
+  /* 跳转配置 */
+  $(document).on("pagebeforeshow","#page13",function () {
+    $('footer').css('display','block');
+    $('.next').css('display','none')
+  });
+
+  /* 下一页 */
+  $('.next').on('click',function () {
+    var page = $(this).parent().parent().index();
+    switch (page){
+      case 7:
+        Topage(7,4);
+        break;
+      case 11:
+        Topage(11,5);
+        break;
+      default:
+        Topage(page,null);
+    }
+  })
+
+  /* 开始答题 */
+  $('.begin').on('click',function () {
+      if(!Zapya.isLogin()) {
+          Zapya.opMsgBox({strText : '请先登录才能参与抽奖', duration : 2000});
+          setTimeout(function () {
+              Zapya.login();
+          }, 2000)
+          return;
+      }
+      window.location = 'http://downloadg.dewmobile.net/weixin/prod/zapya-questionnaire4.0/index.html#page1';
+  })
+
+  /* 页面跳转 */
+  function Topage (page,anscount) {
+    var optionDom = $($('li')[page-1]).find(".option");
+    var optionNum = 0;
+    for(var i=0;i<optionDom.length;i++){
+      if(/checked/.test($(optionDom[i]).attr('class'))){
+        optionNum++;
+      }
+    }
+    if(optionNum==0){
+      Zapya.opMsgBox({strText : 'ေအာက္ပါေမးခြန္းမ်ားကိုေျဖဆိုေပးပါ', duration : 2000});
+    }else {
+      if(anscount){
+        var optionDom = $($('li')[page-1]).find(".option");
+        var num = 0;
+        for(var i=0;i<anscount;i++){
+          if(/checked/.test($(optionDom[i]).attr('class'))){
+            num++;
+          }
+        }
+        if(num==anscount){
+          window.location = 'http://downloadg.dewmobile.net/weixin/prod/zapya-questionnaire4.0/index.html#page'+(page+1);
+        }else{
+          window.location = 'http://downloadg.dewmobile.net/weixin/prod/zapya-questionnaire4.0/index.html#page'+(page+2);
+        }
+      }else{
+        window.location = 'http://downloadg.dewmobile.net/weixin/prod/zapya-questionnaire4.0/index.html#page'+(page+1);
+      }
+    }
+  }
+
+  /* 点选 */
+  $('.question .radio').on('click', function () {
+    $(this).siblings().removeClass('checked')
+    $(this).addClass('checked');
+    var questionId = $(this).parent().parent().index()-1;
+    var optionId = $(this).index() - 1;
+    var checkObj = {
+      id: questionId + 1,
+      answer : questionArr[questionId].options[optionId].id
+    };
+    sendAnswer(checkObj);
+    if(questionId==8){
+      //判断第8题有没有答
+      if(!totalAnswer[7]){
+        totalAnswer[7]={
+          id: 8,
+          answer : []
+        }
+      }
+    }
+    if(questionId==12){
+      //判断第12题有没有答
+      totalAnswer[11]={
+        id: 12,
+        answer : []
+      }
+    }
+    totalAnswer[questionId] = checkObj;
+  });
+
+  $('.question .checkbox').on('click', function () {
+    $(this).toggleClass('checked');
+    var questionId = $(this).parent().parent().index()-1;
+    var optionId = $(this).index() - 1;
+    var isAdd = /checked/.test($(this).attr('class'));
+    var checkOption = questionArr[questionId].options[optionId].id;
+    var answerArr = totalAnswer[questionId] && totalAnswer[questionId].answer || [];
+    if(isAdd) {
+      answerArr.push(checkOption)
+    }else {
+      answerArr.splice(answerArr.indexOf(checkOption), 1)
+    }
+    var checkObj = {
+      id: questionId + 1,
+      answer : answerArr
+    };
+    totalAnswer[questionId] = checkObj;
+    sendAnswer({id: checkObj.id, answer: checkObj.answer.sort().join(',')});
+  });
+
+  /* 渲染 */
+  function render() {
+    var questionText =
+        // 活动结束
+      '<section  id="page0" data-role="page">' +
+        // 首页
+//      '<div class="begin"></div>' +
+      '</section>';
+    for(var i = 0, len1 = questionArr.length; i < len1; i++) {
+      var options = questionArr[i].options;
+      var type = questionArr[i].type;
+      if(type !== 'text') {
+        var optionText = '';
+        for(var j = 0, len2 = options.length; j < len2; j++) {
+          optionText +=
+            '<div class="option '+type+'">' +
+            '<span class="option-item">'+ options[j].id + '.' + options[j].title +'</span>' +
+            '<span class="option-icon"></span>' +
+            '</div>';
+        }
+        questionText +=
+          '<li class="question clearfix"  style="padding: 1.3rem 0 2rem 0;" id="page'+questionArr[i].id+'" data-role="page">' +
+          '<div class="quewraper" style="overflow-y: auto">'+
+          '<div class="title">'+questionArr[i].title+'</div>' +
+          optionText +
+          '<span class="next"></span>'+
+          '</div>'+
+          '</li>';
+      } else {
+        questionText += '<li class="question clearfix">' +
+          '<div class="title">'+questionArr[i].title+'</div>' +
+          '<textarea></textarea>' +
+          '</li>';
+      }
+    }
+    var footer =
+      '<footer style="display: none">'+
+      '<img src="css/img/submit_btn2.0.png" id="submitBtn">'+
+      '</footer>'
+    var main = '<main><ul>' + questionText + '</ul></main>';
+    var app = main ;
+    $('#app').html(app);
+    $($('.quewraper')[12]).append(footer);
+  }
+
+  /* 提交 */
+  $('#submitBtn').on('click', function () {
+      var cookie = getCookie('send');
+      if(cookie){
+        return  Zapya.opMsgBox({strText : 'ခင္ဗ်ားဒီအစီအစဥ္ပါ၀င္ၿပီးျဖစ္ပါသည္', duration : 2000});
+      }
+      sendAllAnswer(totalAnswer);
+  })
+
+  /* 单次 */
+  function sendAnswer(obj) {
+    $.ajax({
+      type : 'POST',
+      url : _gUrl + '/answer/answerOne',
+      data :{
+        uuid : _gUUid,
+        uid : _gUid,
+        mark : _gMark,
+        version: _gVersionCode,
+        id : obj.id,
+        val : obj.answer
+      },
+      contentType: 'application/x-www-form-urlencoded',
+      success : function (data) {
+      },
+      error : function (msg) {
+        console.error(msg);
+      }
+    })
+  }
+
+  /* 全部 */
+  function sendAllAnswer(obj) {
+    var answers = []
+    for(var i = 0; i < obj.length; i++) {
+      if (questionArr[i].type == 'checkbox') {
+        if(obj[i]){
+          answers.push({id: obj[i].id, answer: obj[i].answer.sort().join(',')});
+        }
+      } else {
+        answers.push(obj[i])
+      }
+    }
+    $.ajax({
+      type : 'POST',
+      url : _gUrl + '/answer/answerAll',
+      data : {
+        uuid: _gUUid,
+        uid: _gUid,
+        mark: _gMark,
+        version: _gVersionCode,
+        answer : JSON.stringify(answers)
+      },
+      contentType: 'application/x-www-form-urlencoded',
+      success : function (data) {
+        if(data == 0||data == 1) {
+          setCookie('send',"1");
+          Zapya.opMsgBox({strText :  'ေအာင္ျမင္သြားပါၿပီ', duration : 2000});
+        }
+      },
+      error : function (msg) {
+        Zapya.opMsgBox({strText : '提交失败，请稍后再试', duration : 2000});
+      }
+    })
+  }
+
+</script>
+</html>
